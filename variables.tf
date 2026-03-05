@@ -53,6 +53,17 @@ variable "node_disk_size" {
   default     = 20
 }
 
+variable "node_capacity_type" {
+  description = "Capacity type for worker nodes. Use SPOT for cost savings (PoC default) or ON_DEMAND for stability."
+  type        = string
+  default     = "SPOT"
+
+  validation {
+    condition     = contains(["SPOT", "ON_DEMAND"], var.node_capacity_type)
+    error_message = "node_capacity_type must be either SPOT or ON_DEMAND."
+  }
+}
+
 variable "additional_admin_arns" {
   description = "Additional IAM user or role ARNs to grant EKS cluster admin access"
   type        = list(string)
