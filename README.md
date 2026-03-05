@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[Terraform+EKS](./images/image.png)
+![Terraform+EKS](./images/image.png)
 
 </div>
 
@@ -32,7 +32,7 @@ Create a `main.tf` (or any `.tf` file) in your project and reference this module
 
 ```hcl
 module "eks_poc" {
-  source = "git::https://github.com/<your-org>/terraform-eks-poc.git?ref=main"
+  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=main"
 
   cluster_name = "my-poc"
 }
