@@ -69,14 +69,14 @@ kubectl get nodes
 ### Pin to a specific tag
 
 ```hcl
-source = "git::https://github.com/<your-org>/terraform-eks-poc.git?ref=v1.0.0"
+source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=v1.0.0"
 ```
 
 ### Full example with all options
 
 ```hcl
 module "eks_poc" {
-  source = "git::https://github.com/<your-org>/terraform-eks-poc.git?ref=main"
+  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=main"
 
   cluster_name       = "my-poc"
   kubernetes_version = "1.31"
@@ -153,7 +153,7 @@ To grant additional identities admin access:
 
 ```hcl
 module "eks_poc" {
-  source = "git::https://github.com/<your-org>/terraform-eks-poc.git?ref=main"
+  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=main"
 
   additional_admin_arns = [
     "arn:aws:iam::123456789012:user/alice",

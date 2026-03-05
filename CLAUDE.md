@@ -44,6 +44,7 @@ terraform plan
 ```
 
 Look for the expected resources:
+
 - `aws_vpc.main`
 - `aws_subnet.public` (x2)
 - `aws_subnet.private` (x2)
@@ -126,12 +127,12 @@ terraform apply -var="node_instance_type=t3.medium"
 
 ## Outputs Reference
 
-| Output | How to get it |
-|--------|--------------|
-| kubectl config command | `terraform output -raw configure_kubectl` |
-| Cluster endpoint | `terraform output -raw cluster_endpoint` |
-| Cluster name | `terraform output -raw cluster_name` |
-| VPC ID | `terraform output -raw vpc_id` |
+| Output                      | How to get it                               |
+| --------------------------- | ------------------------------------------- |
+| kubectl config command      | `terraform output -raw configure_kubectl`   |
+| Cluster endpoint            | `terraform output -raw cluster_endpoint`    |
+| Cluster name                | `terraform output -raw cluster_name`        |
+| VPC ID                      | `terraform output -raw vpc_id`              |
 | Caller ARN (admin identity) | `terraform output -raw caller_identity_arn` |
 
 ---
@@ -139,18 +140,22 @@ terraform apply -var="node_instance_type=t3.medium"
 ## Troubleshooting
 
 **Nodes not joining the cluster**
+
 - Check node IAM role policies are attached: `AmazonEKSWorkerNodePolicy`, `AmazonEKS_CNI_Policy`, `AmazonEC2ContainerRegistryReadOnly`
 - Run: `kubectl describe nodes`
 
 **kubectl returns Unauthorized**
+
 - Confirm you're using the same AWS identity that ran `terraform apply`
 - Re-run: `terraform output -raw configure_kubectl | bash`
 - Check: `aws sts get-caller-identity`
 
 **Terraform plan shows unexpected diff on re-run**
+
 - Common with `availability_zones = []` — it resolves at apply time. Safe to ignore if AZs haven't changed.
 
 **NAT Gateway charges accumulating**
+
 - A single NAT GW costs ~$0.045/hr even with no traffic. Run `terraform destroy` when the cluster is not needed.
 
 ---
@@ -168,7 +173,7 @@ terraform apply -var="node_instance_type=t3.medium"
 
 ```hcl
 module "eks_poc" {
-  source = "git::https://github.com/<your-org>/terraform-eks-poc.git?ref=main"
+  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=main"
 
   cluster_name = "my-poc"
 }
