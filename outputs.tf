@@ -42,6 +42,10 @@ output "private_subnet_ids" {
   value       = aws_subnet.private[*].id
 }
 
+output "cluster_sg" {
+  value = aws_eks_cluster.main.vpc_config[0].cluster_security_group_id
+}
+
 output "node_role_arn" {
   description = "ARN of the IAM role attached to worker nodes"
   value       = aws_iam_role.node.arn
