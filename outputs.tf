@@ -13,6 +13,15 @@ output "cluster_ca_certificate" {
   value       = aws_eks_cluster.main.certificate_authority[0].data
 }
 
+output "eks_oidc" {
+  description = "Issuer for OIDC connections"
+  value       = replace(aws_eks_cluster.main.identity[0].oidc[0].issuer,"https://","")
+}
+
+output "eks_oidc_url" {
+   value      = aws_eks_cluster.main.identity[0].oidc[0].issuer
+}
+
 output "cluster_version" {
   description = "Kubernetes version running on the cluster"
   value       = aws_eks_cluster.main.version
