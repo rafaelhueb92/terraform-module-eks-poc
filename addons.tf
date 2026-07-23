@@ -32,7 +32,7 @@ resource "aws_iam_openid_connect_provider" "eks" {
 resource "helm_release" "argocd" {
   count            = var.install_argocd ? 1 : 0
   name             = "argocd"
-  repository       = "https://argo.github.io/argo-helm"
+  repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"
   namespace        = "argocd"
   create_namespace = true
