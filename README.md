@@ -32,7 +32,7 @@ Create a `main.tf` (or any `.tf` file) in your project and reference this module
 
 ```hcl
 module "eks_poc" {
-  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=main"
+  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=master"
 
   cluster_name = "my-poc"
 }
@@ -76,7 +76,7 @@ source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=
 
 ```hcl
 module "eks_poc" {
-  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=main"
+  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=master"
 
   cluster_name       = "my-poc"
   kubernetes_version = "1.31"
@@ -157,7 +157,7 @@ To grant additional identities admin access:
 
 ```hcl
 module "eks_poc" {
-  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=main"
+  source = "git::https://github.com/rafaelhueb92/terraform-module-eks-poc.git?ref=master"
 
   additional_admin_arns = [
     "arn:aws:iam::123456789012:user/alice",
