@@ -81,3 +81,21 @@ variable "private_subnet_tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "install_argocd" {
+  description = "Install Argo CD into the EKS cluster using Helm."
+  type        = bool
+  default     = false
+}
+
+variable "install_karpenter" {
+  description = "Install Karpenter into the EKS cluster using Helm."
+  type        = bool
+  default     = false
+}
+
+variable "install_irsa" {
+  description = "Create the EKS OIDC provider for IRSA when enabled."
+  type        = bool
+  default     = false
+}

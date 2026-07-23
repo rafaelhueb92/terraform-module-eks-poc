@@ -56,6 +56,37 @@ output "configure_kubectl" {
   value       = "aws eks update-kubeconfig --region ${data.aws_region.current.name} --name ${aws_eks_cluster.main.name}"
 }
 
+output "cluster_connection_commands" {
+  description = "Helpful shell commands to connect to the cluster, inspect resources, and log in to Argo CD."
+  value = <<-EOF
+    # Configure kubectl for the EKS cluster
+    aws eks update-kubeconfig --region ${data.aws_region.current.name} --name ${aws_eks_cluster.main.name}
+    kubectl config set-context "$(kubectl config current-context)" --namespace=default
+    kubectl config use-context "$(kubectl config current-context)"
+
+    # Verify cluster
+    kubectl get nodes
+    kubectl get pods -A
+    kubectl get svc -A
+
+    # Debug information
+    kubectl cluster-info
+    kubectl get nodes -o wide
+
+    # Argo CD (if installed)
+    kubectl -n argocd get pods
+    kubectl -n argocd get svc argocd-server
+    kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 --decode; echo
+    kubectl -n argocd port-forward svc/argocd-server 8080:443
+    echo "Then open http://localhost:8080 and login with user 'admin' and the decoded password above."
+
+    # Karpenter (if installed)
+    kubectl get pods -n karpenter
+    kubectl get provisioners
+    kubectl describe provisioner
+  EOF
+}
+
 output "caller_identity_arn" {
   description = "ARN of the IAM identity that ran terraform apply (has cluster admin access)"
   value       = data.aws_caller_identity.current.arn

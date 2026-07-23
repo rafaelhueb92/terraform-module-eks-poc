@@ -125,6 +125,9 @@ output "configure_kubectl" {
 | `node_disk_size`        | Node root disk size (GB)              | `number`       | `20`            |
 | `additional_admin_arns` | Extra IAM ARNs to grant cluster admin | `list(string)` | `[]`            |
 | `tags`                  | Extra tags for all resources          | `map(string)`  | `{}`            |
+| `install_argocd`        | Install Argo CD via Helm              | `bool`         | `false`         |
+| `install_karpenter`     | Install Karpenter via Helm            | `bool`         | `false`         |
+| `install_irsa`          | Create EKS OIDC provider for IRSA     | `bool`         | `false`         |
 
 ---
 
@@ -141,6 +144,7 @@ output "configure_kubectl" {
 | `private_subnet_ids`     | Private subnet IDs                  |
 | `node_role_arn`          | Node IAM role ARN                   |
 | `configure_kubectl`      | `aws eks update-kubeconfig` command |
+| `cluster_connection_commands` | Helpful cluster connection commands |
 | `caller_identity_arn`    | ARN of the identity that ran apply  |
 
 ---
